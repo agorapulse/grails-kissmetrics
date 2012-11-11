@@ -3,10 +3,10 @@ KISSmetrics Grails Plugin
 
 # Introduction
 
-The **KISSmetrics Plugin** allows your [Grails](http://grails.org) application to use [KISSmetrics](http://support.kissmetrics.com/apis) APIs.
+The **KISSmetrics Plugin** allows you to integrate [KISSmetrics](http://www.kissmetrics.com) in your [Grails](http://grails.org) application.
 
 It provides the following Grails artefacts:
-* **KissmetricsService** - A server side client to call [KISSmetrics APIs](http://support.kissmetrics.com/apis/specifications).
+* **KissmetricsService** - A server side service client to call [KISSmetrics APIs](http://support.kissmetrics.com/apis/specifications).
 * **KissmetricsTagLib** - A collection of tags to use [KISSmetrics Javascript Library](http://support.kissmetrics.com/apis/javascript) in your GSPs.
 
 
@@ -36,7 +36,7 @@ grails.project.dependency.resolution = {
 
 Create a [KISSmetrics](http://www.kissmetrics.com) account, in order to get your own apiKey.
 
-Add your KISSmetrics credentials parameters to your _grails-app/conf/Config.groovy_:
+Add your KISSmetrics site apiKey to your _grails-app/conf/Config.groovy_:
 
 ```groovy
 grails.plugin.kissmetrics.apiKey = {API_KEY}
@@ -52,13 +52,10 @@ grails.plugin.kissmetrics.enabled = true
 
 ## KissmetricsService
 
-You can inject _kissmeticsService_ in any of your Grails artefacts (controllers, services...) in order to call KISSmetrics APIs.
+You can inject _kissmetricsService_ in any of your Grails artefacts (controllers, services...) in order to call [KISSmetrics APIs](http://support.kissmetrics.com/apis/specifications).
 
 ```groovy
-def kissmeticsService
-
-// Alias identity
-kissmetricsService.alias('bob@bob.com', 'bob')
+def kissmetricsService
 
 // Record an event
 kissmetricsService.recordEvent('bob@bob.com', 'Signed up')
@@ -71,9 +68,12 @@ kissmetricsService.recordEvent('bob@bob.com', 'Signed up', [plan: 'Pro', amount:
 
 // Set properties
 kissmetricsService.setProperties('bob@bob.com', [gender: 'male'])
+
+// Alias identity
+kissmetricsService.alias('bob@bob.com', 'bob')
 ```
 
-An *async* version is available for each methods (to delegate call to a thread pool and execute it asynchronously).
+An *async* version is available for each methods (to delegate call to a thread pool and execute it asynchronously) for better performances.
 
 ```groovy
 // Alias identity
@@ -85,7 +85,20 @@ kissmetricsService.recordEventAsync('bob@bob.com', 'Signed up')
 // Set properties
 kissmetricsService.setPropertiesAsync('bob@bob.com', [gender: 'male'])
 ```
+HTTP client is based on [HTTPBuilder](http://groovy.codehaus.org/modules/http-builder).
+You might want to surround service method calls in try/catch blocks to catch HttpResponseException.
 
+```groovy
+import groovyx.net.http.HttpResponseException
+
+try {
+    // Record an event
+    kissmetricsService.recordEvent('bob@bob.com', 'Signed up')
+} catch (HttpResponseException exception) {
+    // default failure handler throws an exception:
+    println "Unexpected response error: ${exception.statusCode}"
+}
+```
 
 ## KissmetricsTagLib
 
@@ -98,7 +111,7 @@ To use [KISSmetrics Javascript Library](http://support.kissmetrics.com/apis/java
     <kissmetrics:initJS/>
 ```
 
-Then, you can use [KISSmetrics Javascript Library](http://support.kissmetrics.com/apis/javascript) in your GSP views (to generate Javascript APIs call from client browser).
+Once initialized, you can use [KISSmetrics Javascript Library](http://support.kissmetrics.com/apis/javascript) in your GSP views.
 
 ```jsp
 <!-- Identity current user -->
@@ -116,6 +129,8 @@ Then, you can use [KISSmetrics Javascript Library](http://support.kissmetrics.co
 <!-- Alias identity -->
 <kissmetrics:alias id="bob@bob.com" to="bob"/>
 ```
+
+It will generate the corresponding JS code that will be automatically deferred to page footer thanks to [Grails Resources framework](https://github.com/grails-plugins/grails-resources).
 
 
 # Latest releases
