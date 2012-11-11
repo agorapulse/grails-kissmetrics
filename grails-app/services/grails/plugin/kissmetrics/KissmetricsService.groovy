@@ -31,13 +31,13 @@ class KissmetricsService {
     def recordEvent(String identity, String eventName, Map properties = [:], int timestamp = 0) {
         assert identity
         assert eventName
-        if (enabled) http.get(path: '/e', query: buildQuery(identity, timestamp) + properties + [_n: eventName])
+        if (enabled) http.get(path: '/e', query: buildQuery(identity, timestamp) + [_n: eventName] + properties)
     }
 
     Future recordEventAsync(String identity, String eventName, Map properties = [:], int timestamp = 0) {
         assert identity
         assert eventName
-        if (enabled) asyncHttp.get(path: '/e', query: buildQuery(identity, timestamp) + properties + [_n: eventName])
+        if (enabled) asyncHttp.get(path: '/e', query: buildQuery(identity, timestamp) + [_n: eventName] + properties)
     }
 
     def setProperties(String identity, Map properties = [:], int timestamp = 0) {
@@ -77,10 +77,12 @@ class KissmetricsService {
 
     private HTTPBuilder getHttp() {
         if (!_http) _http = new HTTPBuilder(ROOT_URI)
+        _http
     }
 
     private AsyncHTTPBuilder getAsyncHttp() {
         if (!_asyncHttp) _asyncHttp = new AsyncHTTPBuilder(uri: ROOT_URI)
+        _asyncHttp
     }
 
     private boolean isEnabled() {
