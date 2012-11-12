@@ -1,6 +1,8 @@
 KISSmetrics Grails Plugin
 =========================
 
+[![Build Status](https://buildhive.cloudbees.com/job/benorama/job/grails-kissmetrics/badge/icon)](https://buildhive.cloudbees.com/job/benorama/job/grails-kissmetrics/)
+
 # Introduction
 
 The **KISSmetrics Plugin** allows you to integrate [KISSmetrics](http://www.kissmetrics.com) in your [Grails](http://grails.org) application.
