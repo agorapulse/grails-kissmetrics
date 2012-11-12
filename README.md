@@ -34,9 +34,9 @@ grails.project.dependency.resolution = {
 
 # Config
 
-Create a [KISSmetrics](http://www.kissmetrics.com) account, in order to get your own apiKey.
+Create a [KISSmetrics](http://www.kissmetrics.com) account, in order to get your own _apiKey_.
 
-Add your KISSmetrics site apiKey to your _grails-app/conf/Config.groovy_:
+Add your KISSmetrics site _apiKey_ to your _grails-app/conf/Config.groovy_:
 
 ```groovy
 grails.plugin.kissmetrics.apiKey = {API_KEY}
@@ -92,11 +92,11 @@ You might want to surround service method calls in try/catch blocks to catch Htt
 import groovyx.net.http.HttpResponseException
 
 try {
-    // Record an event
+    // Record an event
     kissmetricsService.recordEvent('bob@bob.com', 'Signed up')
 } catch (HttpResponseException exception) {
-    // default failure handler throws an exception:
-    println "Unexpected response error: ${exception.statusCode}"
+    // default failure handler throws an exception:
+    println "Unexpected response error: ${exception.statusCode}"
 }
 ```
 
@@ -130,7 +130,7 @@ Once initialized, you can use [KISSmetrics Javascript Library](http://support.ki
 <kissmetrics:alias id="bob@bob.com" to="bob"/>
 ```
 
-It will generate the corresponding JS code that will be automatically deferred to page footer thanks to [Grails Resources framework](https://github.com/grails-plugins/grails-resources).
+It will generate the corresponding javascript code that will be automatically deferred to page footer thanks to [Grails Resources framework](https://github.com/grails-plugins/grails-resources).
 
 
 # Latest releases
