@@ -19,7 +19,7 @@ grails.project.dependency.resolution = {
             export = false
         }
         runtime ':resources:1.2.RC2'
-        test(':spock:0.6') {
+        test(':spock:0.7') {
             export = false
         }
     }
