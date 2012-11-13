@@ -28,7 +28,7 @@ grails.project.dependency.resolution = {
 		}
 		plugins {
 				//here go your plugin dependencies
-				runtime ':kissmetrics:0.1.0'
+				runtime ':kissmetrics:0.1.1'
 		}
 }
 ```
@@ -137,7 +137,8 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
-* 2012-11-28 **V0.1.0** : initial release
+* 2012-11-13 **V0.1.1** : minor bug fix in config loader
+* 2012-11-12 **V0.1.0** : initial release
 
 # Bugs
 

@@ -77,12 +77,15 @@ class KissmetricsTagLib {
     }
 
     private boolean isEnabled() {
-        // default enabled for PROD
-        boolean configEnabled = (Environment.current == Environment.PRODUCTION)
-
-        // if config specified, use that instead
+        boolean configEnabled = false
         if (config) {
-            configEnabled = config.enabled
+            // default enabled for PROD
+            configEnabled = (Environment.current == Environment.PRODUCTION)
+
+            // if config specified, use that instead
+            if (config.containsKey('enabled')) {
+                configEnabled = config.enabled
+            }
         }
         configEnabled
     }

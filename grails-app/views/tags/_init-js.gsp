@@ -1,6 +1,6 @@
 <g:if test="${!veroApiKey}">
     <script type="text/javascript">
-        // Kissmetrics + Vero init
+        // Kissmetrics
         var _kmq = _kmq || [];
         var _kmk = _kmk || '${apiKey}';
         function _kms(u){
@@ -17,7 +17,7 @@
 </g:if>
 <g:else>
     <script type="text/javascript">
-        // Kissmetrics
+        // Kissmetrics + Vero init
         var _kmq = _kmq || [];
         function _kms(u){setTimeout(function(){var s=document.createElement('script');var f=document.getElementsByTagName('script')[0];s.type='text/javascript';s.async=true;s.src=u;f.parentNode.insertBefore(s,f);},1);}
         loadKissmetrics = function () {

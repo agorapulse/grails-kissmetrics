@@ -7,9 +7,22 @@ import spock.lang.Specification
 @TestFor(KissmetricsService)
 class KissmetricsServiceSpec extends Specification {
 
+    def "should be disabled by default" () {
+        assert service.enabled == false
+    }
+
+    def "should be disabled for PRODUCTION when no config is provided" () {
+        when:
+        setEnvironment(Environment.PRODUCTION)
+
+        then:
+        assert service.enabled == false
+    }
+
     def "should be enabled for PRODUCTION by default"() {
         when:
         setEnvironment(Environment.PRODUCTION)
+        buildConfig(apiKey: 'apiKey')
 
         then:
         assert service.enabled == true
@@ -18,6 +31,7 @@ class KissmetricsServiceSpec extends Specification {
     def "should be disabled for NON-PRODUCTION by default" () {
         when:
         setEnvironment(Environment.CUSTOM)
+        buildConfig(apiKey: 'apiKey')
 
         then:
         assert service.enabled == false
@@ -25,7 +39,7 @@ class KissmetricsServiceSpec extends Specification {
 
     def "should be enabled when config enables Kissmetrics" () {
         when:
-        enableKissmetrics(true)
+        buildConfig(apiKey: 'apiKey', enabled: true)
 
         then:
         assert service.enabled == true
@@ -34,10 +48,22 @@ class KissmetricsServiceSpec extends Specification {
     def "should be disabled for PRODUCTION when config disables Kissmetrics" () {
         when:
         setEnvironment(Environment.PRODUCTION)
-        enableKissmetrics(false)
+        buildConfig(apiKey: 'apiKey', enabled: false)
 
         then:
         assert service.enabled == false
+    }
+
+    // PRIVATE
+
+    private buildConfig(Map config) {
+        service.grailsApplication.config = [
+                grails: [
+                        plugin: [
+                                kissmetrics: config
+                        ]
+                ]
+        ]
     }
 
     private setEnvironment(environment) {
@@ -46,15 +72,4 @@ class KissmetricsServiceSpec extends Specification {
         }
     }
 
-    private enableKissmetrics(boolean value){
-        service.grailsApplication.config = [
-                grails: [
-                        plugin: [
-                                kissmetrics: [
-                                        enabled: value
-                                ]
-                        ]
-                ]
-        ]
-    }
 }
