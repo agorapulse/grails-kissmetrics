@@ -15,7 +15,6 @@ class KissmetricsTagLib {
             Map model = [
                     apiKey: config.apiKey
             ]
-            if (config.veroApiKey) model.veroApiKey = config.veroApiKey
             out << render(template: '/tags/init-js', model: model, plugin: 'kissmetrics')
         }
     }
