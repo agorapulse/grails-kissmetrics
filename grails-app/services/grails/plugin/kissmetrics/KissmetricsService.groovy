@@ -49,9 +49,7 @@ class KissmetricsService {
 
     Future setPropertiesAsync(String identity, Map properties = [:], int timestamp = 0) {
         assert identity
-        if (enabled) {
-            http.get(path: '/s', query: buildQuery(identity, timestamp) + properties)
-        }
+        if (enabled) asyncHttp.get(path: '/s', query: buildQuery(identity, timestamp) + properties)
     }
 
     // PRIVATE
