@@ -11,6 +11,7 @@
 /*.launch
 /*.tmproj
 
+.DS_Store
 *.log
 *.zip
 *.iml

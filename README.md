@@ -106,12 +106,16 @@ try {
 
 To use [KISSmetrics Javascript Library](http://support.kissmetrics.com/apis/javascript), you must first initialize it in page header (most probably in you layout GSP).
 
+# JS Lib initialization
+
 ```jsp
 <!DOCTYPE html>
 <html>
 <head>
     <kissmetrics:initJS/>
 ```
+
+# Identification and event recording
 
 Once initialized, you can use [KISSmetrics Javascript Library](http://support.kissmetrics.com/apis/javascript) in your GSP views.
 
@@ -137,6 +141,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
+* 2012-11-15 **V0.1.2** : minor bug fix in setPropertiesAsync (it was not executed asynchronously)
 * 2012-11-13 **V0.1.1** : minor bug fix in config loader
 * 2012-11-12 **V0.1.0** : initial release
 
