@@ -77,7 +77,7 @@ class KissmetricsTagLib {
 
     private boolean isEnabled() {
         boolean configEnabled = false
-        if (config) {
+        if (config.apiKey) {
             // default enabled for PROD
             configEnabled = (Environment.current == Environment.PRODUCTION)
 
