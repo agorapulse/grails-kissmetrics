@@ -25,7 +25,6 @@ class KissmetricsTagLib {
      * @attr id REQUIRED
      * @attr to REQUIRED
      */
-
     def alias = { attrs ->
         if (enabled) {
             out << render(template: '/tags/alias', model: attrs, plugin: 'kissmetrics')
@@ -37,7 +36,6 @@ class KissmetricsTagLib {
      *
      * @attr id REQUIRED
      */
-
     def identify = { attrs ->
         if (enabled) {
             out << render(template: '/tags/identify', model: attrs, plugin: 'kissmetrics')
@@ -50,7 +48,6 @@ class KissmetricsTagLib {
      * @attr event REQUIRED
      * @attr properties
      */
-
     def record = { attrs ->
         if (enabled) {
             out << render(template: '/tags/record', model: attrs, plugin: 'kissmetrics')
@@ -62,7 +59,6 @@ class KissmetricsTagLib {
      *
      * @attr properties REQUIRED
      */
-
     def set = { attrs ->
         if (enabled) {
             out << render(template: '/tags/set', model: attrs, plugin: 'kissmetrics')
@@ -77,7 +73,7 @@ class KissmetricsTagLib {
 
     private boolean isEnabled() {
         boolean configEnabled = false
-        if (config.apiKey) {
+        if (config?.apiKey) {
             // default enabled for PROD
             configEnabled = (Environment.current == Environment.PRODUCTION)
 
