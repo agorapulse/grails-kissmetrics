@@ -13,6 +13,7 @@ grails.project.dependency.resolution = {
         compile('org.codehaus.groovy.modules.http-builder:http-builder:0.6') {
             excludes "commons-logging", "xml-apis", "groovy"
         }
+        test 'org.spockframework:spock-grails-support:0.7-groovy-2.0'
     }
     plugins {
         build(':release:2.2.0', ':rest-client-builder:1.0.3') {
@@ -20,6 +21,7 @@ grails.project.dependency.resolution = {
         }
         runtime ':resources:1.2.RC2'
         test(':spock:0.7') {
+            exclude 'spock-grails-support'
             export = false
         }
     }
