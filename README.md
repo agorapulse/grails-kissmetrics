@@ -141,7 +141,7 @@ It will generate the corresponding javascript code that will be automatically de
 
 # Latest releases
 
-* 2013-01-09 **V0.2.0** : minor bug fix in config (check apiKey) + Grails upgraded to 2.2.0
+* 2013-01-09 **V0.2.0** : minor bug fix in taglib (check apiKey) + Grails upgraded to 2.2.0
 * 2012-11-15 **V0.1.2** : minor bug fix in setPropertiesAsync (it was not executed asynchronously)
 * 2012-11-13 **V0.1.1** : minor bug fix in config loader
 * 2012-11-12 **V0.1.0** : initial release
